@@ -12,4 +12,21 @@ router.get('/', async (req, res, next) => {
   }
 })
 
+router.get('/new', (req, res, next) => {
+  res.render('new', { title: 'Novo Cadastro' })
+})
+
+router.post('/new', async (req, res, next) => {
+  const name = req.body.name
+  const age = parseInt(req.body.age)
+
+  try {
+    const result = await db.insert({ name, age })
+    console.log(result)
+    res.redirect('/')
+  } catch (err) {
+    next(err)
+  }
+})
+
 module.exports = router

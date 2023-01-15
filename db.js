@@ -1,4 +1,5 @@
 const { MongoClient, ObjectId } = require('mongodb')
+const { route } = require('./routes')
 
 let singleton
 
@@ -19,4 +20,9 @@ async function findAll() {
   return db.collection(COLLECTION).find().toArray()
 }
 
-module.exports = { findAll }
+async function insert(customer) {
+  const db = await connect()
+  return db.collection(COLLECTION).insertOne(customer)
+}
+
+module.exports = { findAll, insert }
