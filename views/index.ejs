@@ -15,7 +15,9 @@
   <ul>
     <% docs.forEach((customer)=>{ %>
       <li>
-        <%= customer.name %>
+        <a href="/edit/<%= customer._id %>">
+          <%= customer.name %>
+        </a>
       </li>
       <%})%>
   </ul>
