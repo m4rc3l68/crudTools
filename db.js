@@ -1,4 +1,5 @@
 const { MongoClient } = require('mongodb')
+const router = require('./routes')
 const { route } = require('./routes')
 
 let singleton
@@ -38,4 +39,9 @@ async function update(id, customer) {
     .updateOne({ _id: new ObjectId(id) }, { $set: customer })
 }
 
-module.exports = { findAll, insert, findOne, update }
+async function deleteOne(id) {
+  const db = await connect()
+  return db.collection(COLLECTION).deleteOne({ _id: new ObjectId(id) })
+}
+
+module.exports = { findAll, insert, findOne, update, deleteOne }

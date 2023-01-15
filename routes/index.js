@@ -62,4 +62,16 @@ router.post('/edit/:id', async (req, res, next) => {
   }
 })
 
+router.get('/delete/:id', async (req, res, next) => {
+  const id = req.params.id
+
+  try {
+    const result = await db.deleteOne(id)
+    console.log(result)
+    res.redirect('/')
+  } catch (err) {
+    next(err)
+  }
+})
+
 module.exports = router
